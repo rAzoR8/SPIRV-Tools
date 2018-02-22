@@ -57,7 +57,7 @@
 #define SPIRV_UNIMPLEMENTED(consumer, feature)                  \
   do {                                                          \
     spvtools::Log(consumer, SPV_MSG_INTERNAL_ERROR, __FILE__,   \
-                  {__LINE__, 0, 0}, "unimplemented: " feature); \
+                  {size_t(__LINE__), size_t(0), size_t(0)}, "unimplemented: " feature); \
   } while (0)
 
 // Logs an error message to the consumer saying the code location
@@ -65,7 +65,7 @@
 #define SPIRV_UNREACHABLE(consumer)                           \
   do {                                                        \
     spvtools::Log(consumer, SPV_MSG_INTERNAL_ERROR, __FILE__, \
-                  {__LINE__, 0, 0}, "unreachable");           \
+                  {size_t(__LINE__), size_t(0), size_t(0)}, "unreachable");           \
   } while (0)
 
 // Helper macros for concatenating arguments.
@@ -158,7 +158,7 @@ inline void Errorf(const MessageConsumer& consumer, const char* source,
   do {                                                                  \
     if (!(condition)) {                                                 \
       spvtools::Log(consumer, SPV_MSG_INTERNAL_ERROR, __FILE__,         \
-                    {__LINE__, 0, 0}, "assertion failed: " #condition); \
+                    {size_t(__LINE__), size_t(0), size_t(0)}, "assertion failed: " #condition); \
       std::exit(EXIT_FAILURE);                                          \
     }                                                                   \
   } while (0)
@@ -167,7 +167,7 @@ inline void Errorf(const MessageConsumer& consumer, const char* source,
   do {                                                               \
     if (!(condition)) {                                              \
       spvtools::Log(consumer, SPV_MSG_INTERNAL_ERROR, __FILE__,      \
-                    {__LINE__, 0, 0}, "assertion failed: " message); \
+                    {size_t(__LINE__), size_t(0), size_t(0)}, "assertion failed: " message); \
       std::exit(EXIT_FAILURE);                                       \
     }                                                                \
   } while (0)
@@ -176,7 +176,7 @@ inline void Errorf(const MessageConsumer& consumer, const char* source,
   do {                                                              \
     if (!(condition)) {                                             \
       spvtools::Logf(consumer, SPV_MSG_INTERNAL_ERROR, __FILE__,    \
-                     {__LINE__, 0, 0}, "assertion failed: " format, \
+                     {size_t(__LINE__), size_t(0), size_t(0)}, "assertion failed: " format, \
                      __VA_ARGS__);                                  \
       std::exit(EXIT_FAILURE);                                      \
     }                                                               \
@@ -193,13 +193,13 @@ inline void Errorf(const MessageConsumer& consumer, const char* source,
 
 #define SPIRV_DEBUG_1(consumer, message)                               \
   do {                                                                 \
-    spvtools::Log(consumer, SPV_MSG_DEBUG, __FILE__, {__LINE__, 0, 0}, \
+    spvtools::Log(consumer, SPV_MSG_DEBUG, __FILE__, {size_t(__LINE__), size_t(0), size_t(0)}, \
                   message);                                            \
   } while (0)
 
 #define SPIRV_DEBUG_more(consumer, format, ...)                         \
   do {                                                                  \
-    spvtools::Logf(consumer, SPV_MSG_DEBUG, __FILE__, {__LINE__, 0, 0}, \
+    spvtools::Logf(consumer, SPV_MSG_DEBUG, __FILE__, {size_t(__LINE__), size_t(0), size_t(0)}, \
                    format, __VA_ARGS__);                                \
   } while (0)
 
